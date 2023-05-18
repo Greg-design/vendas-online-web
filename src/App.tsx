@@ -1,18 +1,12 @@
 import type { Router as RemixRouter } from "@remix-run/router";
-import { RouteObject, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
+import { firstScreenRoutes } from "./modules/firstScreen/routes";
 import { loginRoutes } from "./modules/login/routes";
+import { productScreens } from "./modules/product/routes";
 import { useNotification } from "./shared/hooks/useNotification";
 
-const mainRoutes: RouteObject[] = [
-  {
-    path: "/",
-    element: <div>Tela Principal</div>,
-    errorElement: <div>Página não encontrada!</div>,
-  },
-];
-
-const router: RemixRouter = createBrowserRouter([...mainRoutes, ...loginRoutes]);
+const router: RemixRouter = createBrowserRouter([...firstScreenRoutes, ...loginRoutes, ...productScreens]);
 
 function App() {
   const { contextHolder } = useNotification();
