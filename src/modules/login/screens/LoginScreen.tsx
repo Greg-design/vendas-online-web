@@ -11,6 +11,7 @@ import {
   LogoImage,
   TitleLogin,
 } from "../styles/loginScreen.styles";
+import { UserType } from "../types/UserType";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -28,12 +29,13 @@ const LoginScreen = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = () => {
-    setAccessToken("novo Token");
-    postRequest("http://localhost:8080/auth", {
+  const handleLogin = async () => {
+    const user = await postRequest<UserType>("http://localhost:8080/auth", {
       email: email,
       password: password,
     });
+    //quando fizer login e der sucesso aparece o accessToken
+    setAccessToken(user?.accessToken || "");
   };
 
   return (
